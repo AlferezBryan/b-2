@@ -1,17 +1,17 @@
 <template lang="html">
   <div class="">
-    <h1 class="display-1 text-md-center mb-2">Empleados</h1>
+    <h1 class="display-1 text-md-center mb-2">Formulario de Contacto</h1>
     <div class="my-4">
-      <v-btn large to="/dashboard/employees/new">Nuevo Empleado</v-btn>
+      <v-btn large to="/dashboard/contact/new">Nuevo Formulario</v-btn>
     </div>
-    <v-data-table :headers="headers" :items="employees" class="elevation-1">
-      <!-- <no-ssr> -->
+    <v-data-table :headers="headers" :items="form" class="elevation-1">
         <template slot="items" slot-scope="props">
+          <td>{{ props.item.createdAt | formatDate}}</td>
           <td>{{ props.item.name }}</td>
-          <td class="">{{ props.item.auth.email }}</td>
+          <td>{{ props.item.email }}</td>
+          <td>{{ props.item.phone }}</td>
           <v-btn small @click="remove(props.item._id)">Eliminar</v-btn>
         </template>
-      <!-- </no-ssr> -->
     </v-data-table>
   </div>
 </template>
@@ -19,21 +19,23 @@
 <script>
 export default {
   async asyncData ({ app }) {
-    let employees
+    let form
     try {
-      employees = await app.$axios.$get('/admin/staff/employees')
+      form = await app.$axios.$get('/admin/contact/form')
     } catch (e) {
-      employees = []
+      form = []
     }
-    return { employees }
+    return { form }
   },
   data () {
     return {
       loading: false,
       deleting: {},
       headers: [
+        { text: 'Fecha de Registro', value: 'createdAt' },
         { text: 'Nombre', value: 'name' },
-        { text: 'Correo', value: 'auth.email' },
+        { text: 'Correo Electronico', value: 'email' },
+        { text: 'Telefono', value: 'phone' },
         { text: 'Acciones', value: '' }
 
       ]
@@ -44,7 +46,7 @@ export default {
       if (this.loading) return
       try {
         this.loading = true
-        this.employees = await this.$axios.$get('admin/staff/employees')
+        this.form = await this.$axios.$get('/admin/contact/form')
       } catch (e) {
         console.log(e.message)
       } finally {
@@ -56,8 +58,8 @@ export default {
       if (!window.confirm('¿Seguro que desea eliminar esta empleado')) return
       try {
         this.deleting[_id] = true
-        await this.$axios.$delete('/admin/staff/employees/' + _id)
-        this.employees = this.employees.filter(e => e._id !== _id)
+        await this.$axios.$delete('/admin/contact/form/' + _id)
+        this.form = this.form.filter(e => e._id !== _id)
       } catch (e) {
         console.log(e.message)
       } finally {

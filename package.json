@@ -17,6 +17,7 @@
     "@nuxtjs/axios": "^5.3.1",
     "@nuxtjs/dotenv": "^1.1.1",
     "dotenv": "^6.0.0",
+    "moment": "^2.22.2",
     "nuxt": "^1.0.0",
     "vuetify": "^1.0.19"
   },

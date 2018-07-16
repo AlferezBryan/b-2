@@ -1,13 +1,13 @@
-<template lang="html">
+<template>
   <div class="">
-    <nuxt/>
+    <h1>Error</h1>
+    <pre>{{ error }}</pre>
   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'auth',
-  layout: 'dashboard'
+  props: ['error']
 }
 </script>
 
