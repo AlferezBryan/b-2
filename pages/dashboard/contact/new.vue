@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 mx-auto>
         <v-card>
-          <v-card-title class="amber lighten-2 white--text">
+          <v-card-title class="lighten-2 white--text">
             <v-flex text-sm-center>
               <h1>Nueva Formulario de Contacto</h1>
             </v-flex>
