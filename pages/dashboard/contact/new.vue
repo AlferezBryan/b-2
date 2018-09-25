@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12 mx-auto>
         <v-card>
-          <v-card-title class="lighten-2 white--text">
+          <v-card-title class="black white--text">
             <v-flex text-sm-center>
               <h1>Nueva Formulario de Contacto</h1>
             </v-flex>
@@ -29,16 +29,6 @@
                 counter="16"
                 required
               ></v-text-field>
-              <!-- <v-flex class="text-xs-center text-sm-center text-md-center text-lg-center">
-                <v-text-field label="Seleccionar imagen" @click="pickFile" :value="tempFilename" prepend-icon="attach_file"></v-text-field>
-                <input
-                  type="file"
-                  style="display: none"
-                  ref="image"
-                  accept="image/*"
-                  @change="onFilePicked">
-                <img :src="imageUrl" height="150" v-if="imageUrl"/>
-              </v-flex> -->
               <v-btn type="submit" :disabled="loading">Registrar</v-btn>
             </form>
           </v-card-text>
@@ -58,8 +48,6 @@ export default {
         mail: '',
         phone: ''
       },
-      // imageUrl: '',
-      // tempFilename: 'Selecciona',
       nameRules: [
         (v) => !!v || 'Campo requerido'
       ],

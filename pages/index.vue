@@ -15,6 +15,16 @@
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
+    <v-dialog v-if="incorrect" v-model="dialog" persistent max-width="290">
+      <v-card>
+        <v-card-title class="headline">Error</v-card-title>
+        <v-card-text>El usuario y/o contraseña es incorrecto</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="black" flat @click.native="dialog = false">Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -26,6 +36,8 @@ export default {
     return {
       url: process.env.API_URL,
       valid: true,
+      dialog: false,
+      incorrect: false,
       auth: {
         email: '',
         password: ''
@@ -35,8 +47,13 @@ export default {
   methods: {
     async login () {
       if (!this.$refs.form.validate()) return
-      await this.$auth.loginWith('local', { data: this.auth })
+      console.log('hola')
+      await this.$auth.loginWith('local', { data: this.auth }).then().catch(this.isLogin)
       this.$router.push('/dashboard')
+    },
+    isLogin () {
+      this.dialog = true
+      this.incorrect = true
     }
   }
 }

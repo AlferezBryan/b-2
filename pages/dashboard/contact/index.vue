@@ -4,12 +4,13 @@
     <div class="my-4">
       <v-btn large to="/dashboard/contact/new">Nuevo Formulario</v-btn>
     </div>
-    <v-data-table :headers="headers" :items="form" class="elevation-1">
+    <v-data-table :headers="headers" :items="formsPag.data" :pagination.sync="pagination" :total-items="this.formsPag.pages" class="elevation-1" >
         <template slot="items" slot-scope="props">
           <td>{{ props.item.createdAt | formatDate}}</td>
           <td>{{ props.item.name }}</td>
           <td>{{ props.item.email }}</td>
           <td>{{ props.item.phone }}</td>
+          <v-btn :to="`/dashboard/contact/${props.item._id}/show`" small>Detalles</v-btn>
           <v-btn small @click="remove(props.item._id)">Eliminar</v-btn>
         </template>
     </v-data-table>
@@ -31,6 +32,8 @@ export default {
     return {
       loading: false,
       deleting: {},
+      formsPag: [],
+      pagination: {},
       headers: [
         { text: 'Fecha de Registro', value: 'createdAt' },
         { text: 'Nombre', value: 'name' },
@@ -41,18 +44,23 @@ export default {
       ]
     }
   },
-  methods: {
-    async load () {
-      if (this.loading) return
-      try {
-        this.loading = true
-        this.form = await this.$axios.$get('/admin/contact/form')
-      } catch (e) {
-        console.log(e.message)
-      } finally {
-        this.loading = false
+  computed: {
+    pages () {
+      if (this.pagination.rowsPerPage == null ||
+        this.pagination.totalItems == null
+      ) return 0
+
+      return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
+    }
+  },
+  watch: {
+    pagination: {
+      async handler () {
+        this.formsPag = await this.$axios.$get('/admin/contact/form', { params: { page: this.pagination.page } })
       }
-    },
+    }
+  },
+  methods: {
     async remove (_id) {
       if (this.deleting[_id]) return
       if (!window.confirm('¿Seguro que desea eliminar esta empleado')) return
