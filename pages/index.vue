@@ -3,15 +3,20 @@
     <!-- <img src="icon.ico" alt=""> -->
     <v-card class="elevation-12">
       <v-card-text>
-        <h1>Inicio de Sesión</h1>
+        <h1>BalanZ</h1>
         <v-form ref="form" v-model="valid">
-          <v-text-field v-model="auth.email" @keyup.enter="login" prepend-icon="person" name="login" label="Login" type="email" required></v-text-field>
-          <v-text-field v-model="auth.password" @keyup.enter="login" prepend-icon="lock" name="password" label="Password" id="password" type="password" required></v-text-field>
+          <v-text-field v-model="auth.username" @keyup.enter="login" prepend-icon="person" name="login" label="Usuario" type="username" required></v-text-field>
+          <v-text-field v-model="auth.password" @keyup.enter="login" prepend-icon="lock" name="password" label="Contraseña" id="password" type="password" required></v-text-field>
         </v-form>
       </v-card-text>
       <v-card-actions >
         <v-spacer></v-spacer>
-        <v-btn dark :disabled="!valid" @click="login">Login</v-btn>
+        <v-btn dark :disabled="!valid" @click="login">Acceder</v-btn>
+        <v-spacer></v-spacer>
+      </v-card-actions>
+      <v-card-actions >
+        <v-spacer></v-spacer>
+        <v-btn dark @click="register">Registrarse</v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
@@ -39,7 +44,7 @@ export default {
       dialog: false,
       incorrect: false,
       auth: {
-        email: '',
+        username: '',
         password: ''
       }
     }
@@ -50,6 +55,9 @@ export default {
       console.log('hola')
       await this.$auth.loginWith('local', { data: this.auth }).then().catch(this.isLogin)
       this.$router.push('/dashboard')
+    },
+    async register () {
+      this.$router.push('/register')
     },
     isLogin () {
       this.dialog = true
