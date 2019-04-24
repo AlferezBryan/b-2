@@ -14,10 +14,12 @@
           <v-card-title class="">
             <div class="">
               <p>Nombre: {{this.$auth.user.name}}</p>
-              <p>Edad: {{this.$auth.user.age}}22 años</p>
-              <p>Género: Masculino</p>
-              <p>Estatura: 1.77 m</p>
-              <p class="mb-0">Peso: 90 Kg</p>
+              <p>Edad: {{this.$auth.user.age}} años</p>
+              <p>Género: {{this.$auth.user.gender}}</p>
+              <p>Estatura: {{this.$auth.user.height}} cm</p>
+              <p>Peso: {{this.$auth.user.width}} Kg</p>
+              <p>TMB: {{this.$auth.user.tmb}} </p>
+              <p class="mb-0">IMC: {{this.$auth.user.imc}} (ideal: 18.5 – 24.9)</p>
             </div>
           </v-card-title>
         </v-card>

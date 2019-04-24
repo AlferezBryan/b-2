@@ -21,7 +21,7 @@
           <v-list-tile-title>Información General</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="$router.push('/dashboard/diet')">
+      <!-- <v-list-tile @click="$router.push('/dashboard/diet')">
         <v-list-tile-action>
           <v-icon medium dark>fastfood</v-icon>
         </v-list-tile-action>
@@ -44,7 +44,7 @@
         <v-list-tile-content>
           <v-list-tile-title>Recetas Saludables</v-list-tile-title>
         </v-list-tile-content>
-      </v-list-tile>
+      </v-list-tile> -->
       <v-list-tile @click="$auth.logout()">
         <v-list-tile-action>
           <v-icon medium dark>exit_to_app</v-icon>
