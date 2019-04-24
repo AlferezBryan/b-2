@@ -1,39 +1,56 @@
 <template lang="html">
-  <v-navigation-drawer v-model="showDrawer" fixed app width="250">
-    <!-- <div style="text-align: center;">
-      <img src="/icon.ico" width="200px" height="200px">
-    </div> -->
-    <v-list dense>
-      <v-list-tile >
+  <v-navigation-drawer right v-model="showDrawer" fixed app width="250" class="pa-2 teal accent-4">
+    <div class="py-4" style="text-align: center;">
+      <v-avatar
+        color="grey lighten-4"
+        size=100
+      >
+        <!-- <img :src="this.$auth.user.avatar" alt="avatar"> -->
+        <img src="/contact.png" alt="avatar">
+      </v-avatar>
+    </div>
+    <p class="text-xs-center font-weight-bold white--text">
+      ¡Hola {{this.$auth.user.name}}!
+    </p>
+    <v-list dense class="white--text">
+      <v-list-tile @click="$router.push('/dashboard')">
         <v-list-tile-action>
-          <v-icon>home</v-icon>
+          <v-icon medium dark>assignment_ind</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Bienvenido al Dashboard</v-list-tile-title>
+          <v-list-tile-title>Información General</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="$router.push('/dashboard/contact')">
+      <v-list-tile @click="$router.push('/dashboard/diet')">
         <v-list-tile-action>
-          <v-icon>folder</v-icon>
+          <v-icon medium dark>fastfood</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Formulario</v-list-tile-title>
+          <v-list-tile-title>Dieta Diaria</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="$router.push('/dashboard/employees')">
+      <v-list-tile @click="$router.push('/dashboard/rutine')">
         <v-list-tile-action>
-          <v-icon>folder</v-icon>
+          <v-icon medium dark>offline_bolt</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Empleados</v-list-tile-title>
+          <v-list-tile-title>Rutina Diaria</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile @click="$router.push('/dashboard/recipes')">
+        <v-list-tile-action>
+          <v-icon medium dark>assignment</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Recetas Saludables</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile @click="$auth.logout()">
         <v-list-tile-action>
-          <v-icon>exit_to_app</v-icon>
+          <v-icon medium dark>exit_to_app</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Logout</v-list-tile-title>
+          <v-list-tile-title>Cerrar Sesión</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
