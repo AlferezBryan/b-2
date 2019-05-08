@@ -12,14 +12,14 @@
       <v-flex xs10 s5 offset-xs1>
         <v-card class="">
           <v-card-title class="">
-            <div class="">
+            <div v-if="datos.data" class="">
               <p>Nombre: {{this.$auth.user.name}}</p>
-              <p>Edad: {{this.$auth.user.age}} años</p>
+              <p>Edad: {{datos.data.age}} años</p>
               <p>Género: {{this.$auth.user.gender}}</p>
-              <p>Estatura: {{this.$auth.user.height}} cm</p>
-              <p>Peso: {{this.$auth.user.width}} Kg</p>
-              <p>TMB: {{this.$auth.user.tmb}} </p>
-              <p class="mb-0">IMC: {{this.$auth.user.imc}} (ideal: 18.5 – 24.9)</p>
+              <p>Estatura: {{datos.data.height}} cm</p>
+              <p>Peso: {{datos.data.width}} Kg</p>
+              <p>TMB: {{datos.data.tmb}} </p>
+              <p class="mb-0">IMC: {{datos.data.imc}} (ideal: 18.5 – 24.9)</p>
             </div>
           </v-card-title>
         </v-card>
@@ -32,6 +32,16 @@
 </template>
 
 <script>
+export default {
+  data () {
+    return {
+      datos: ''
+    }
+  },
+  async mounted () {
+    this.datos = await this.$axios.get(process.env.API_URL + '/admin/staff/status/' + this.$auth.user.id)
+  }
+}
 </script>
 
 <style lang="css">

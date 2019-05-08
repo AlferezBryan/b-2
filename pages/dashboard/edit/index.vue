@@ -83,28 +83,28 @@
               <v-layout row wrap>
                 <v-flex xs6>
                   <v-checkbox
-                    :v-model="form.illness1"
+                    v-model="form.illness1"
                     class="ma-0"
                     label="Enfermedad 1"
-                  ></v-checkbox>{{form.illness1}}
+                  ></v-checkbox>
                 </v-flex>
                 <v-flex xs6>
                   <v-checkbox
-                    :v-model="form.illness2"
+                    v-model="form.illness2"
                     class="ma-0"
                     label="Enfermedad 2"
                   ></v-checkbox>
                 </v-flex>
                 <v-flex xs6>
                   <v-checkbox
-                    :v-model="form.illness3"
+                    v-model="form.illness3"
                     class="ma-0"
                     label="Enfermedad 3"
                   ></v-checkbox>
                 </v-flex>
                 <v-flex xs6>
                   <v-checkbox
-                    :v-model="form.illness4"
+                    v-model="form.illness4"
                     class="ma-0"
                     label="Enfermedad 4"
                   ></v-checkbox>
@@ -142,21 +142,20 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     this.form.name = this.$auth.user.name
-    this.form.age = this.$auth.user.age
     this.form.gender = this.$auth.user.gender
-    this.form.height = this.$auth.user.height
-    this.form.width = this.$auth.user.width
-    this.form.style = this.$auth.user.style
-    this.form.illness1 = this.$auth.user.illness1
-    this.form.illness2 = this.$auth.user.illness2
-    this.form.illness3 = this.$auth.user.illness3
-    this.form.illness4 = this.$auth.user.illness4
-    this.form.tmb = this.$auth.user.tmb
-    this.form.imc = this.$auth.user.imc
-    console.log(this.form.illness1);
-    console.log(this.form.illness4);
+    var estado = await this.$axios.get(process.env.API_URL + '/admin/staff/status/' + this.$auth.user.id)
+    this.form.age = estado.data.age
+    this.form.height = estado.data.height
+    this.form.width = estado.data.width
+    this.form.style = estado.data.style
+    this.form.illness1 = estado.data.illness1
+    this.form.illness2 = estado.data.illness2
+    this.form.illness3 = estado.data.illness3
+    this.form.illness4 = estado.data.illness4
+    this.form.tmb = estado.data.tmb
+    this.form.imc = estado.data.imc
   },
   methods: {
     async save() {

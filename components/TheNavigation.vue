@@ -21,6 +21,14 @@
           <v-list-tile-title>Información General</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile v-if="this.$auth.user.auth.username==='bryanxdz'" @click="$router.push('/dashboard/contact')">
+        <v-list-tile-action>
+          <v-icon medium dark>assignment_ind</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Casos de estudio</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       <!-- <v-list-tile @click="$router.push('/dashboard/diet')">
         <v-list-tile-action>
           <v-icon medium dark>fastfood</v-icon>

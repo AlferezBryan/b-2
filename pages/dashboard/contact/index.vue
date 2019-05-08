@@ -1,17 +1,17 @@
 <template lang="html">
   <div class="">
-    <h1 class="display-1 text-md-center mb-2">Formulario de Contacto</h1>
-    <div class="my-4">
+    <h1 class="display-1 text-md-center mb-2">Casos de estudio</h1>
+    <!-- <div class="my-4">
       <v-btn large to="/dashboard/contact/new">Nuevo Formulario</v-btn>
-    </div>
-    <v-data-table :headers="headers" :items="formsPag.data" :pagination.sync="pagination" :total-items="this.formsPag.pages" class="elevation-1" >
+    </div> -->
+    <v-data-table :headers="headers" :items="form" class="elevation-1" >
         <template slot="items" slot-scope="props">
-          <td>{{ props.item.createdAt | formatDate}}</td>
-          <td>{{ props.item.name }}</td>
-          <td>{{ props.item.email }}</td>
-          <td>{{ props.item.phone }}</td>
-          <v-btn :to="`/dashboard/contact/${props.item._id}/show`" small>Detalles</v-btn>
-          <v-btn small @click="remove(props.item._id)">Eliminar</v-btn>
+          <!-- <td>{{ props.item.createdAt | formatDate}}</td> -->
+          <td>{{ props.item.userID }}</td>
+          <td>{{ props.item.age }}</td>
+          <td>{{ props.item.height }}</td>
+          <td>{{ props.item.width }}</td>
+          <!-- <v-btn :to="`/dashboard/contact/${props.item._id}/show`" small>Detalles</v-btn> -->
         </template>
     </v-data-table>
   </div>
@@ -22,7 +22,7 @@ export default {
   async asyncData ({ app }) {
     let form
     try {
-      form = await app.$axios.$get('/admin/contact/form')
+      form = await app.$axios.$get('/admin/staff/status')
     } catch (e) {
       form = []
     }
@@ -35,14 +35,17 @@ export default {
       formsPag: [],
       pagination: {},
       headers: [
-        { text: 'Fecha de Registro', value: 'createdAt' },
-        { text: 'Nombre', value: 'name' },
-        { text: 'Correo Electronico', value: 'email' },
-        { text: 'Telefono', value: 'phone' },
+        { text: 'Usuario', value: 'userID' },
+        { text: 'Edad', value: 'age' },
+        { text: 'Altura', value: 'height' },
+        { text: 'Peso', value: 'width' },
         { text: 'Acciones', value: '' }
 
       ]
     }
+  },
+  mounted() {
+    console.log(this.form);
   },
   computed: {
     pages () {
@@ -57,21 +60,6 @@ export default {
     pagination: {
       async handler () {
         this.formsPag = await this.$axios.$get('/admin/contact/form', { params: { page: this.pagination.page } })
-      }
-    }
-  },
-  methods: {
-    async remove (_id) {
-      if (this.deleting[_id]) return
-      if (!window.confirm('¿Seguro que desea eliminar esta empleado')) return
-      try {
-        this.deleting[_id] = true
-        await this.$axios.$delete('/admin/contact/form/' + _id)
-        this.form = this.form.filter(e => e._id !== _id)
-      } catch (e) {
-        console.log(e.message)
-      } finally {
-        this.deleting[_id] = false
       }
     }
   }
