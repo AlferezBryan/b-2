@@ -41,35 +41,35 @@
             <v-card-text class="">
               <v-layout row wrap>
                 <v-flex xs4 @click="form.style = '1'">
-                  <v-card :class="form.style === '1' ? 'teal accent-4 white--text':''">
+                  <v-card :class="form.style === '1' ? 'teal accent-4 white--text':''" style="cursor: pointer">
                     <v-card-text>
                       <p class="font-weight-bold mb-0">Normal</p>
                     </v-card-text>
                     <v-divider/>
-                    <v-card-text>
-                      <p>[Imagen caminando]</p>
+                    <v-card-text style="display: flex; align-items: center; justify-content: center">
+                      <div style="height: 100px; width: 100px; background-image: url(/normal.jpg); background-size: cover; background-position: 100% 50%"/>
                     </v-card-text>
                   </v-card>
                 </v-flex>
                 <v-flex xs4 @click="form.style = '2'">
-                  <v-card :class="form.style === '2' ? 'teal accent-4 white--text':''">
+                  <v-card :class="form.style === '2' ? 'teal accent-4 white--text':''" style="cursor: pointer">
                     <v-card-text>
                       <p class="font-weight-bold mb-0">Ejercitado</p>
                     </v-card-text>
                     <v-divider/>
-                    <v-card-text>
-                      <p>[Imagen corriendo]</p>
+                    <v-card-text style="display: flex; align-items: center; justify-content: center">
+                      <div style="height: 100px; width: 100px; background-image: url(/ejercitado.jpg); background-size: cover; background-position: 80% 50%"/>
                     </v-card-text>
                   </v-card>
                 </v-flex>
                 <v-flex xs4 @click="form.style = '0'">
-                  <v-card :class="form.style === '0' ? 'teal accent-4 white--text':''">
+                  <v-card :class="form.style === '0' ? 'teal accent-4 white--text':''" style="cursor: pointer">
                     <v-card-text>
                       <p class="font-weight-bold mb-0">Sedentario</p>
                     </v-card-text>
                     <v-divider/>
-                    <v-card-text>
-                      <p>[Imagen sentado]</p>
+                    <v-card-text style="display: flex; align-items: center; justify-content: center">
+                      <div style="height: 100px; width: 100px; background-image: url(/sedentario.jpg); background-size: cover; background-position: 50% 50%"/>
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -85,20 +85,21 @@
                   <v-checkbox
                     v-model="form.illness1"
                     class="ma-0"
-                    label="Enfermedad 1"
+                    label="Problemas visuales"
                   ></v-checkbox>
                 </v-flex>
                 <v-flex xs6>
                   <v-checkbox
                     v-model="form.illness2"
                     class="ma-0"
-                    label="Enfermedad 2"
+                    label="Triglicéridos"
                   ></v-checkbox>
                 </v-flex>
                 <v-flex xs6>
                   <v-checkbox
                     v-model="form.illness3"
                     class="ma-0"
+                    disabled
                     label="Enfermedad 3"
                   ></v-checkbox>
                 </v-flex>
@@ -106,6 +107,7 @@
                   <v-checkbox
                     v-model="form.illness4"
                     class="ma-0"
+                    disabled
                     label="Enfermedad 4"
                   ></v-checkbox>
                 </v-flex>

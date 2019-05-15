@@ -11,6 +11,7 @@
           <td>{{ props.item.age }}</td>
           <td>{{ props.item.height }}</td>
           <td>{{ props.item.width }}</td>
+          <td>{{ props.item.imc }}</td>
           <!-- <v-btn :to="`/dashboard/contact/${props.item._id}/show`" small>Detalles</v-btn> -->
         </template>
     </v-data-table>
@@ -39,7 +40,8 @@ export default {
         { text: 'Edad', value: 'age' },
         { text: 'Altura', value: 'height' },
         { text: 'Peso', value: 'width' },
-        { text: 'Acciones', value: '' }
+        { text: 'IMC', value: 'imc' },
+        // { text: 'Acciones', value: '' }
 
       ]
     }
